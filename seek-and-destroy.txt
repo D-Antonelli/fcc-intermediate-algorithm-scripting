@@ -1,0 +1,17 @@
+function destroyer(array, ...arr) {
+  let seek = [...arr];
+  let andDestroy = [...array];
+
+  seek.forEach(ele => {
+    while(andDestroy.indexOf(ele) >= 0) {
+      let index = andDestroy.indexOf(ele);
+      andDestroy.splice(index, 1);
+    }
+  })
+ 
+  return andDestroy;
+}
+
+
+
+

@@ -1,0 +1,30 @@
+function steamrollArray(arr) {
+
+  let flatten = arr.reduce((array, item) => {
+          return array.concat(item);
+  },[]);
+  
+  
+  //find nested arrays within flattened array
+  let nestedArr = flatten.filter(ele => ele.length>0);
+
+  //iterate each nested array and replace them with unnested elements inside flatten array
+  nestedArr.forEach(ele => {
+  let nestedInx = flatten.indexOf(ele);
+  flatten.splice(nestedInx, 1);
+  while(true) {
+    ele = ele[0];
+    //check element is not array object anymore
+    if(typeof ele !== "object") {
+      flatten.push(ele);
+      break;
+    }  
+  }
+  });
+
+  return flatten;   
+  }
+
+//test
+//steamrollArray([[["a"]], [["b"]]]);
+

@@ -1,0 +1,24 @@
+function myReplace(str, before, after) {
+  const regex = /[A-Z]/;
+
+  //check whether 'before' has capital letter
+  let found = str.match(before);
+  let capital = found[0][0].match(regex);
+  let replaced;
+
+  if(capital == null) {
+  replaced = str.replace(before, after);
+
+  } else {
+    //Turn the initial letter into capital word and replace it
+    let capital = after.charAt(0).toUpperCase();
+    let newStr = after.replace(/[a-z]/, capital);
+    replaced = str.replace(before, newStr);
+  }
+  return replaced;
+}
+
+//test
+myReplace("His name is Tom", "Tom", "john");
+myReplace("This has a spellngi error", "spellngi", "spelling");
+myReplace("Let us get back to more Coding", "Coding", "algorithms");

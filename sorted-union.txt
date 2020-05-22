@@ -1,0 +1,38 @@
+function uniteUnique(...theArgs) {
+
+//concatenate all argumements 
+let concatArgs = theArgs.reduce((accumulator, currentVal) => {
+    return accumulator.concat(currentVal); 
+  },[]);
+
+//sort in ascending order
+let sorted = [...concatArgs];
+sorted.sort((val1, val2) => {
+    return val1 < val2? -1 : 1;
+  }); 
+
+//remove duplicates to search and get unique elements
+let removeDuplicates = sorted.filter((ele, index, sorted) => {
+      return ele !== sorted[index+1];
+  });
+
+
+let res = [];
+
+  for(let i=0; i<concatArgs.length; i++) {
+    for(let j=0; j<removeDuplicates.length; j++) {
+      if(removeDuplicates[j] == concatArgs[i]) {
+        if(res.indexOf(concatArgs[i]) < 0) {
+          res.push(concatArgs[i]);
+        }       
+      }
+    }
+  }
+
+return res;
+
+}
+
+//test
+uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]);
+uniteUnique([1, 2, 3], [5, 2, 1]);

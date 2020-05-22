@@ -1,0 +1,29 @@
+function orbitalPeriod(arr) {
+  var GM = 398600.4418;
+  var earthRadius = 6367.4447;
+
+  const calculatePeriod = avgAlt => {
+    let flightVel = Math.sqrt(GM/(earthRadius+avgAlt));
+    let period = (2*Math.PI)*((earthRadius+avgAlt)/flightVel);
+    return Math.round(period);
+  }
+
+  let res = arr.reduce((arr, obj) => {
+
+    for(let key in obj) {
+      if(key === 'avgAlt') {
+        let orbitalPeriod = calculatePeriod(obj['avgAlt']);
+        obj['orbitalPeriod'] = orbitalPeriod;
+        delete obj[key];
+      }
+    }
+    arr.push(obj);
+    return arr; 
+  },[]);
+
+  return res;
+}
+
+//test
+orbitalPeriod([{name : "sputnik", avgAlt : 35873.5553}]);
+orbitalPeriod([{name: "iss", avgAlt: 413.6}, {name: "hubble", avgAlt: 556.7}, {name: "moon", avgAlt: 378632.553}])

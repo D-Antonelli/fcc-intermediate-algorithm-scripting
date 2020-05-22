@@ -1,0 +1,45 @@
+function whatIsInAName(collection, source) {
+  var arr = [];
+
+  //create an array to store the count of common key/value match between collection and source
+  let commonProps = [];
+  let count = 0;
+
+  
+  for(let i=0; i<collection.length; i++) {
+    let obj = collection[i]; 
+    for (let key in source) {
+      let targetVal = source[key];
+      //store the count number in commonprops array index corresponding to each collection object's index
+      if(obj[key] === targetVal) {
+        count++;
+        commonProps[i] = count;
+      }
+    }
+    count = 0;
+  }
+
+  //compare the common props count to the source keys count. More than or at least source key length should match in every object in collection. 
+  let foundIndex = [];
+  let keyNumsOfSource = Object.keys(source).length;
+  for(let i=0; i<commonProps.length; i++) {
+    if(commonProps[i] >= keyNumsOfSource) {
+      foundIndex.push(i);
+    }
+  }
+  
+  //Once indexes are matched, push them to the arr
+  foundIndex.forEach(index => {
+    arr.push(collection[index]);
+  });
+  console.log(arr);
+  
+
+  // Only change code above this line
+  return arr;
+}
+
+//Test
+whatIsInAName([{ "apple": 1, "bat": 2 }, { "bat": 2 }, { "apple": 1, "bat": 2, "cookie": 2 }], { "apple": 1, "bat": 2 }) //should return [{ "apple": 1, "bat": 2 }, { "apple": 1, "bat": 2, "cookie": 2 }]
+
+whatIsInAName([{"a": 1, "b": 2, "c": 3}], {"a": 1, "b": 9999, "c": 3})// should return []

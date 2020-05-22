@@ -1,0 +1,16 @@
+function truthCheck(collection, pre) {
+  let isTrue = false;
+  for(let i=0; i<collection.length; i++) {
+    for(let key in collection[i]) {
+      if(key===pre && collection[i][pre]) {
+        isTrue = true;
+      }
+      else if(key===pre && !collection[i][pre] || !collection[i].hasOwnProperty(pre)) {
+        return isTrue = false;  
+      }
+    }
+  }
+  return isTrue;
+}
+
+truthCheck([{"user": "Tinky-Winky", "sex": "male"}, {"user": "Dipsy"}, {"user": "Laa-Laa", "sex": "female"}, {"user": "Po", "sex": "female"}], "sex")

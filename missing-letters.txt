@@ -1,0 +1,34 @@
+function fearNotLetter(str) {
+
+  let utfArr = [];
+
+  for(let i=0; i<str.length; i++) {
+    let utfCode = str.charCodeAt(i);
+    utfArr.push(utfCode);
+    }
+
+
+  let startNum = utfArr[0];  
+  let missingUtf = 0;
+
+  for(let i=0; i<utfArr.length; i++) {
+    if(utfArr[i] !== startNum) {
+      missingUtf = startNum;
+      break;
+    }
+    startNum++;
+  }
+ 
+  let res = String.fromCharCode(missingUtf); 
+
+  if(missingUtf === 0) {
+    return undefined;
+  } else {
+    return res;
+  }  
+  }
+ 
+//Test
+fearNotLetter("abce");
+fearNotLetter("abcdefghjklmno");
+fearNotLetter("abcdefghijklmnopqrstuvwxyz");

@@ -1,0 +1,36 @@
+function sumFibs(num) {
+    //declare first and second numbers in sequence
+    let x = 0;
+    let y = 1;
+
+    let temp;
+    let sum = 0;
+
+    let fibNums = [1];
+
+    while(sum <=num) {
+      sum = x + y;
+      temp = y;
+      y = sum;
+      x = temp;
+
+      if(sum >num) {
+        break;
+      }
+      fibNums.push(sum);
+    }
+
+    //filter odd numbers
+    let odd = fibNums.filter(ele => ele%2 ==1);
+
+    //sum numbers in the array
+    let res = odd.reduce((accumulator, ele) => accumulator +ele);
+    console.log(res);
+    return res;
+  }
+  
+//test
+sumFibs(1);
+sumFibs(4000000);
+sumFibs(4);
+sumFibs(75024);

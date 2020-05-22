@@ -1,0 +1,37 @@
+function diffArray(arr1, arr2) {
+  var newArr = [];
+  newArr = arr1.concat(arr2);
+  
+  let obj = {};
+  for(let i=0; i<newArr.length; i++) {
+    if(!obj.hasOwnProperty(newArr[i])) {
+      obj[newArr[i]] = 1;
+    } else {
+      obj[newArr[i]]++;
+    }
+  }
+  
+  let findDiff = [];
+  for(let ele in obj) {
+    if(obj[ele] == 1) {
+      findDiff.push(ele);        
+    }  
+    }
+
+ let mapped = findDiff.map(ele => {
+   let num = parseInt(ele);
+   //check if number equals to NaN or not
+   if(num === num) {
+     return num;
+   } else {
+     return ele;
+   }
+   });   
+
+  console.log(mapped);
+  //console.log(findDiff);
+  return mapped;
+}
+
+
+

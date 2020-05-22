@@ -1,0 +1,26 @@
+function sumAll(arr) {
+  let nums = [];
+  let begin = arr[0];
+  let end = arr[1];
+
+  if(begin<end) {
+    while(begin<=end) {
+    nums.push(begin);
+    begin++;
+  }
+  } else {
+    while(end<=begin) {
+      nums.push(end);
+      end++;
+    }
+  }
+  
+  let res = nums.reduce((a,b) => a+b);
+
+  console.log(res);
+
+  return res;
+}
+
+sumAll([1, 4]);
+sumAll([5, 10]);

@@ -1,0 +1,68 @@
+function convertHTML(str) {
+
+  const regex = /"|&|<|>|"|'/g;
+
+  //match and get the characters in passed parameter
+  let arr = [...str.matchAll(regex)];
+  
+  //record all matched characters in array
+  let matchedChars = arr.map(ele => {
+    return ele[0];
+  })
+
+  //pass each character to function and find out corresponding entity for each.
+  let getEntities = [];
+  matchedChars.forEach(ele => {
+      getEntities.push(replace(ele));
+  });
+
+  //replace each occurence to the result string
+  let index = 0;
+  let res = str;
+  while(index < matchedChars.length) {
+    res = res.replace(matchedChars[index], getEntities[index]);
+    index++;
+  }
+ 
+  console.log(res);
+  return res;
+}
+
+
+let replace = character => {
+  let str = ''
+  
+  switch(character) {
+    case '&':
+    str = '&amp;';
+    break;
+
+    case '<':
+    str = '&lt;';
+    break;
+
+    case '>':
+    str = '&gt;';
+    break;
+
+    case '"':
+    str = '&quot;';
+    break;
+
+    case "'":
+    str = '&apos;';
+    break;
+
+    default:
+    str = '';
+  }
+  return str;
+}
+
+//test
+//convertHTML("Dolce & Gabbana");
+//convertHTML("Hamburgers < Pizza < Tacos");
+//convertHTML("Sixty > twelve");
+//convertHTML('Stuff in "quotation marks"');
+//convertHTML("Schindler's List");
+//convertHTML("<>");

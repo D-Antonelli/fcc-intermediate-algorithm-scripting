@@ -1,0 +1,93 @@
+function smallestCommons(arr) {
+
+  let start = Math.min(arr[0], arr[1]);
+  let end = Math.max(arr[0],arr[1]);
+
+  let array = [];
+
+  //push each number to an array 
+  for(let i=start; i<=end; i++) {
+    array.push(i);
+  }
+
+
+//function to check if iterated element is a prime, if prime, push to the param array
+  const checkIfPrime = (num, primeArr) => {
+    if(num%2!==0 && num%3!==0 && num%5!==0 && primeArr.indexOf(num)===-1) {
+          primeArr.push(num);
+        }
+  }
+
+  
+  //multiply each factor the greatest number of times it occurs in either number.
+  let maxFactorTwo = 0;
+  let maxFactorThree = 0;
+  let maxFactorFive = 0;
+
+  let primeNums = [];
+
+
+  for(let i=0; i<array.length; i++) {
+
+    if(array[i]%2==0) {
+      let result =1;
+      let ele = array[i];
+      checkIfPrime(ele, primeNums);
+    
+      while(ele%2==0) {
+        ele=ele/2;
+        checkIfPrime(ele, primeNums);
+        result*=2;
+        if(result>maxFactorTwo) {
+         maxFactorTwo=result;
+      }
+  } 
+    }
+   
+
+    if(array[i]%3==0) {
+      let result =1;
+      let ele = array[i];
+      checkIfPrime(ele, primeNums);
+
+      while(ele%3==0) {
+        ele=ele/3;
+        checkIfPrime(ele, primeNums);
+        result*=3;
+        if(result>maxFactorThree) {
+         maxFactorThree=result;
+  }
+  } 
+
+    }
+
+    if(array[i]%5==0) {
+      let result =1;
+      let ele = array[i];
+      checkIfPrime(ele, primeNums);
+
+      while(ele%5==0) {
+        ele=ele/5;
+        checkIfPrime(ele, primeNums);
+        result*=5;
+        if(result>=maxFactorFive) {
+         maxFactorFive=result;
+  }
+  }
+    }
+  
+   checkIfPrime(array[i], primeNums);
+}
+
+ 
+  let greatestFactors= [maxFactorTwo, maxFactorThree, maxFactorFive, ...primeNums];
+  let res = greatestFactors.reduce((result, nextNum) => {return result*nextNum},1);
+  return res;
+}
+
+
+
+smallestCommons([23,18]);
+//smallestCommons([1,5]);
+//smallestCommons([2,10]);
+

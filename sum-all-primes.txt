@@ -1,0 +1,29 @@
+function sumPrimes(num) {
+  let nums = [];
+
+  //first push all numbers start from 2 to smaller than or equal to num. Number 1 is not prime, therefore not included.
+  for(let i=2; i<=num; i++) {
+    nums.push(i);
+  }
+
+ //find non-prime numbers and delete them in the array 
+  for(let i=1; i<=num; i++) { 
+    for(let j=1; j<=num; j++) {
+      if(i%j==0 && j!==1 && j!==i) {
+        let index = nums.indexOf(i);
+        nums.splice(index, 1);
+        break;
+      }
+    }
+  }
+
+  //sum all prime numbers
+  const primeSum = nums.reduce((init, num) => init+num);
+  return primeSum;
+
+}
+
+//test
+sumPrimes(10);
+sumPrimes(977);
+sumPrimes(11);

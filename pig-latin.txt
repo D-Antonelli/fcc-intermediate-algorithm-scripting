@@ -1,0 +1,30 @@
+function translatePigLatin(str) {
+  
+  let regex = /[aeiouAEIOU]|[\w^aeiouAEIOU]$/;
+  let found = str.match(regex);
+  let foundIndex = found.index;
+  let pigLatin;
+
+  if(foundIndex == str.length-1) {
+    pigLatin = str + 'ay';
+  }
+
+  else if(foundIndex == 0) {
+     pigLatin = str+'way';
+  } 
+
+  else if(foundIndex > 0) {
+    let afterVowel = str.slice(foundIndex);
+    let consonant = str.slice(0, foundIndex);
+    pigLatin = afterVowel.concat(consonant+'ay'); 
+  }
+
+  console.log(pigLatin);
+  return pigLatin;
+}
+
+
+translatePigLatin("california");
+translatePigLatin("rhythm");
+translatePigLatin("glove");
+

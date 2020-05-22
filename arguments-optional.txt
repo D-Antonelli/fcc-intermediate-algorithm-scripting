@@ -1,0 +1,30 @@
+function addTogether(...args) {
+  
+  let length = args.length;
+
+  let isValid = args.every(ele => typeof ele === 'number');
+
+  if(length > 1 && isValid) {
+    let sum = args.reduce((sum, next) => sum+next);
+    return sum;
+  }
+
+  else if(length===1 && isValid) {
+      return function sumUp(num) {
+        if(typeof num === 'number') {
+          return parseInt(args) + parseInt(num);
+        } else {
+          return undefined;
+        }    
+    }
+  }
+
+}
+
+
+
+//addTogether("http://bit.ly/IqT6zt") //should return undefined.
+//addTogether(2)([3])
+//addTogether(2, "3");
+console.log(addTogether(2)(3));
+

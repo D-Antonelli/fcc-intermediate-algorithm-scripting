@@ -1,0 +1,26 @@
+function spinalCase(str) {
+
+  let regex = /([a-z]+)(\W*|\w)([A-Z]|[a-z]^)/g;
+
+  function replacer(match, p1, p2, p3, offset, string) {
+  return [p1, p3].join('-');
+    }
+
+let replacedByDash = str.replace(regex, replacer);
+let convertToLowerCase = replacedByDash.toLowerCase();
+let joinSpace = convertToLowerCase.split(' ').join('-');
+console.log(joinSpace);
+return joinSpace;
+}
+
+
+//test
+spinalCase("This Is Spinal Tap");
+spinalCase("The_Andy_Griffith_Show");
+spinalCase("thisIsSpinalTap");
+spinalCase("Teletubbies say Eh-oh");
+spinalCase("AllThe-small Things");
+
+
+
+
